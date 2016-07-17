@@ -3,7 +3,7 @@ import { reduxForm } from 'redux-form';
 
 class Signin extends Component {
   
-  handleFormSubmit({ email, password}) {
+  static handleFormSubmit({ email, password}) {
     // Signin user
     console.log(email, password);
   }
@@ -11,7 +11,7 @@ class Signin extends Component {
   render () {
     const { handleSubmit, fields: { email, password }} = this.props;
     return(
-      <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
+      <form onSubmit={handleSubmit(Signin.handleFormSubmit.bind(this))}>
         <fieldset className="form-group">
           <label>Email:</label>
           <input {...email} className="form-control" />
