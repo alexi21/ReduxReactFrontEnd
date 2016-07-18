@@ -2,7 +2,8 @@ import axios from 'axios';
 import { browserHistory } from 'react-router';
 import {
   AUTH_USER,
-  AUTH_ERROR
+  AUTH_ERROR,
+  UNAUTH_USER
 } from './types';
 
 const API_URL = 'http://localhost:3090';
@@ -41,4 +42,11 @@ export function authError(error) {
     type: AUTH_ERROR,
     payload: error
   };
+}
+
+export function signoutUser() {
+  // delete localStorage
+  localStorage.removeItem('token');
+  // run action
+  return { type: UNAUTH_USER };
 }
