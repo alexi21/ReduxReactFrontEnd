@@ -3,7 +3,8 @@ import { browserHistory } from 'react-router';
 import {
   AUTH_USER,
   UNAUTH_USER,
-  AUTH_ERROR
+  AUTH_ERROR,
+  FETCH_DATA
 } from './types';
 
 const API_URL = 'http://localhost:3090';
@@ -41,6 +42,8 @@ export function signupUser({ email, password }) {
 
   // Use redux-thunk
   return function(dispatch) {
+
+    // Submit email and password to the server
     axios.post(`${API_URL}/signup`, { email, password })
       .then(response => {
         // Good request
@@ -69,3 +72,31 @@ export function signoutUser() {
   // run action
   return { type: UNAUTH_USER };
 }
+
+// Make API request to root url of api
+export function fetchMessage() {
+  return function(dispatch) {
+    axios.get(API_URL, {
+      headers: { authorization: localStorage.getItem('token') }
+    })
+      .then(response => {
+        dispatch({
+          type: FETCH_DATA,
+          payload: response.data.message
+        })
+      });
+  }
+}
+
+// Redux Promise Pattern
+
+// export function fetchMessage() {
+//   const request = axios.get(API_URL, {
+//     headers: { authorization: localStorage.getItem('token')}
+//   });
+//
+//   return {
+//     type: FETCH_DATA,
+//     payload: request
+//   };
+// }
