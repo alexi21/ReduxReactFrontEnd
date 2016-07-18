@@ -2,8 +2,8 @@ import axios from 'axios';
 import { browserHistory } from 'react-router';
 import {
   AUTH_USER,
-  AUTH_ERROR,
-  UNAUTH_USER
+  UNAUTH_USER,
+  AUTH_ERROR
 } from './types';
 
 const API_URL = 'http://localhost:3090';
@@ -35,6 +35,25 @@ export function signinUser({ email, password }) {
         dispatch(authError('Bad Login Info'));
       });
   };
+}
+
+export function signupUser({ email, password }) {
+
+  // Use redux-thunk
+  return function(dispatch) {
+    axios.post(`${API_URL}/signup`, { email, password })
+      .then(response => {
+        // Good request
+        dispatch({ type: AUTH_USER });
+
+        // Update JWT
+        localStorage.setItem('token', response.data.token);
+
+        // redirect
+        browserHistory.push('/feature');
+      })
+      .catch(error => dispatch(authError('email in use'))); // error.data.error
+  }
 }
 
 export function authError(error) {
