@@ -1,25 +1,21 @@
-# ReduxSimpleStarter
+# Redux React Client App
 
-Interested in learning [Redux](https://www.udemy.com/react-redux/)?
+Consumes the ServerAPIwithAuth
 
-###Getting Started###
+## Allows the creation of users and the persistent storage of jwt
 
-There are two methods for getting started with this repo.
+### Signup
 
-####Familiar with Git?#####
-Checkout this repo, install dependencies, then start the gulp process with the following:
+creates and saves a new user on the server, whilst updating the state on the client and saving the response jwt in local storage.
 
-```
-	> git clone git@github.com:StephenGrider/ReduxSimpleStarter.git
-	> cd ReduxSimpleStarter
-	> npm install
-	> npm start
-```
+### Signin
 
-####Not Familiar with Git?#####
-Click [here](https://github.com/StephenGrider/ReactStarter/releases) then download the .zip file.  Extract the contents of the zip file, then open your terminal, change to the project directory, and:
+Signs in the user after authenticating on the server by updating the redux store, and stores the response jwt in local storage.
 
-```
-	> npm install
-	> npm start
-```
+### Signout
+
+Signs out the user and deletes the jwt.
+
+### Route to API
+
+Makes request with jwt in header, rendering successful API calls
