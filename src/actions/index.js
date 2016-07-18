@@ -55,7 +55,11 @@ export function signupUser({ email, password }) {
         // redirect
         browserHistory.push('/feature');
       })
-      .catch(error => dispatch(authError('email in use'))); // error.data.error
+      .catch(function (error) {
+        const errorMessage = JSON.parse(error.response.data);
+
+        dispatch(authError(errorMessage.error));
+      });
   }
 }
 
