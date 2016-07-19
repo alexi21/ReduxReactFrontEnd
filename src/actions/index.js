@@ -56,7 +56,7 @@ export function signupUser({ email, password }) {
         browserHistory.push('/feature');
       })
       .catch(response => {
-        dispatch(authError(response.data.error));
+        dispatch(authError(response.response.data.error));
       });
   }
 }
