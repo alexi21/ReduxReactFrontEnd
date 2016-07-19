@@ -55,10 +55,8 @@ export function signupUser({ email, password }) {
         // redirect
         browserHistory.push('/feature');
       })
-      .catch(function (error) {
-        const errorMessage = JSON.parse(error.response.data);
-
-        dispatch(authError(errorMessage.error));
+      .catch(response => {
+        dispatch(authError(response.data.error));
       });
   }
 }

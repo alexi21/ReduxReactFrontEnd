@@ -65,17 +65,9 @@ class Signup extends Component {
 function validate(formProps) {
   const errors = {};
 
-  if (!formProps.email) {
-    errors.email = 'Please enter an email';
-  }
-
-  if (!formProps.password) {
-    errors.password = 'Please enter a password';
-  }
-
-  if (!formProps.passwordConfirm) {
-    errors.passwordConfirm = 'Please enter a password confirmation';
-  }
+  ['email', 'password', 'passwordConfirm'].forEach(elem => {
+      if (!formProps[elem]) errors[elem] = `Please enter your ${elem}`
+    });
 
   if (formProps.password !== formProps.passwordConfirm) {
     errors.password = 'passwords must match';

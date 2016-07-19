@@ -3,7 +3,11 @@ import { reduxForm } from 'redux-form';
 import * as actions from '../../actions';
 
 class Signin extends Component {
-  
+  //
+  // componentWillMount() {
+  //   this.props.errorMessage = '';
+  // }
+  //
   static handleFormSubmit({ email, password}) {
     // Signin user
     this.props.signinUser({email, password});
